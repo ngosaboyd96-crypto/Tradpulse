@@ -2,9 +2,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Returning to DerivPulse…</title>
-<p>Returning to DerivPulse… <a id="l">Tap here if nothing happens</a></p>
-<script>
-  const target = "com.aistudio.derivpulse.vkwrmx://callback" + location.search;
-  document.getElementById("l").href = target;
-  location.replace(target);
-</script>
+<body style="font-family:sans-serif;padding:24px;background:#0b0f19;color:#fff;word-break:break-all">
+  <h2>DerivPulse login result</h2>
+  <p id="info"></p>
+  <a id="l" style="display:inline-block;padding:16px 28px;background:#00e5a8;color:#000;border-radius:12px;font-size:18px;text-decoration:none">Open DerivPulse</a>
+  <script>
+    const p = new URLSearchParams(location.search);
+    document.getElementById("info").textContent =
+      "code: " + (p.has("code") ? "received" : "MISSING") +
+      " | state: " + (p.has("state") ? "present" : "MISSING") +
+      " | error: " + (p.get("error") || "none") + " " + (p.get("error_description") || "");
+    const target = "com.aistudio.derivpulse.vkwrmx://callback" + location.search;
+    document.getElementById("l").href = target;
+    setTimeout(() => { location.href = target; }, 6000);
+  </script>
+</body>
